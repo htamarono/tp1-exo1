@@ -1,21 +1,25 @@
+input.onButtonPressed(Button.A, function () {
+    led.unplot(x, 0)
+    x += -1
+    led.plot(x, 0)
+})
+input.onButtonPressed(Button.B, function () {
+    led.unplot(x, 0)
+    x += 1
+    led.plot(x, 0)
+})
 let x = 0
+let direction = 1
+x = 2
 led.plot(x, 0)
-if (x < 4) {
-    while (true) {
-        basic.pause(1000)
-        led.unplot(x, 0)
-        basic.pause(1000)
-        x += 1
-        led.plot(x, 0)
+basic.forever(function () {
+    led.unplot(x, 0)
+    x += direction
+    led.plot(x, 0)
+    if (x >= 4) {
+        direction = -1
+    } else if (x <= 0) {
+        direction = 1
     }
-}
-x = 4
-led.plot(x, 0)
-if (x == 4) {
-    while (true) {
-        basic.pause(100)
-        led.unplot(x, 0)
-        x += -1
-        led.plot(x, 0)
-    }
-}
+    basic.pause(200)
+})
